@@ -54,7 +54,7 @@ module Orocos
     # This is shared by local and remote processes alike
     def self.log_all_process_ports(process, options = Hash.new)
         options, logger_options = Kernel.filter_options options,
-            :tasks => nil, :exclude_ports => nil, :exclude_types => nil
+            :tasks => nil, :exclude_ports => nil, :exclude_types => nil, :stop => false
 
         tasks = options[:tasks]
         exclude_ports = options[:exclude_ports]
@@ -80,11 +80,10 @@ module Orocos
                 logger.log(port)
             end
         end
-        if !logger.running?
+        if !logger.running? and not options[:stop]
             logger.start
         end
 
         logged_ports
     end
 end
-

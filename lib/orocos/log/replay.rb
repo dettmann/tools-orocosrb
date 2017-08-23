@@ -1034,7 +1034,7 @@ module Orocos
             #This is used to support the syntax.
             #log_replay.task 
             def method_missing(m,*args,&block) #:nodoc:
-                task = @tasks[map_to_namespace(m.to_s)]
+                task = @tasks[m.to_s]
                 return task if task
 
                 begin  
